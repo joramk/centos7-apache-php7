@@ -27,7 +27,6 @@ RUN {   yum install yum-utils epel-release -y; \
         yum --enablerepo=remi,remi-php71 install -y phpMyAdmin; \
         yum update -y; yum clean all; rm -rf /var/cache/yum; \
 }
-ADD supplementary.tar.xz /
 
 RUN {   ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
         sed -i 's/localhost/db1.docker1.dmz.lonet.org/g' /etc/phpMyAdmin/config.inc.php; \
