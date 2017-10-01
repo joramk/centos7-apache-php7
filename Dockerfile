@@ -29,7 +29,6 @@ RUN {   yum install yum-utils epel-release -y; \
 }
 
 RUN {   ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
-        sed -i 's/localhost/db1.docker1.dmz.lonet.org/g' /etc/phpMyAdmin/config.inc.php; \
         sed -i 's/;date.timezone =/date.timezone = Europe\/Berlin/g' /etc/opt/remi/php71/php.ini; \
         sed -i 's/expose_php = On/expose_php = Off/g' /etc/opt/remi/php71/php.ini; \
         sed -i 's/;date.timezone =/date.timezone = Europe\/Berlin/g' /etc/php.ini; \
@@ -40,6 +39,6 @@ RUN {   ln -sf ../usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
 }
 
 HEALTHCHECK CMD systemctl -q is-active httpd || exit 1
-VOLUME ["/var/www", "/etc/httpd/certs", "/etc/httpd/conf.d"]
+VOLUME ["/var/www", "/etc/httpd/conf.d"]
 EXPOSE 80
 CMD ["/sbin/init"]
