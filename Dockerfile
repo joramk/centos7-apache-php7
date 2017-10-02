@@ -2,16 +2,6 @@ FROM    centos:7
 MAINTAINER joramk@gmail.com
 ENV     container docker
 
-ENV     HTTPD_MODSSL            1
-ENV     HTTPD_HOSTNAME          localhost
-ENV     HTTPD_IP                127.0.0.1
-ENV     HTTPD_PORT              80
-ENV     HTTPD_SSLPORT           443
-ENV     HTTPD_DOCUMENTROOT      /var/www/html
-ENV     HTTPD_SERVERADMIN       root@localhost
-ENV     HTTPD_HARDENING         1
-ENV     HTTPD_TIMEZONE          Europe/Berlin
-
 LABEL   name="CentOS 7 - Latest Apache / PHP / phpMyAdmin" \
         vendor="CentOS" \
         license="GPLv2" \
