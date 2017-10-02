@@ -37,7 +37,7 @@ RUN {   (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == sy
 }
 
 COPY    ./docker-entrypoint.sh /
-RUN {   systemctl enable httpd; \
+RUN {   systemctl enable httpd crond; \
         touch /firstrun; \
         chmod +rx /docker-entrypoint.sh; \
 }
