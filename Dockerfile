@@ -8,7 +8,7 @@ LABEL   name="CentOS 7 - Latest Apache / PHP / phpMyAdmin" \
         build-date="20171002" \
         maintainer="joramk@gmail.com"
 
-RUN {   yum update -y; yum install systemd yum-utils epel-release -y; \
+RUN {   yum update -y; yum install systemd yum-utils yum-cron epel-release -y; \
         curl https://repo.codeit.guru/codeit.el7.repo >/etc/yum.repos.d/codeit.el7.repo; \
         yum install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm -y; \
         yum install httpd mod_ssl openssl php71-php \ 
@@ -31,6 +31,7 @@ RUN {   (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == sy
         rm -f /lib/systemd/system/basic.target.wants/*; \
         rm -f /lib/systemd/system/anaconda.target.wants/*; \
         sed -i 's/expose_php = On/expose_php = Off/g' /etc/opt/remi/php71/php.ini; \
+        sed -i 's/apply_updates = no/apply_updates = yes/g' /etc/yum/yum-cron.conf; \
         sed -i 's/#LoadModule mpm_prefork_module modules\/mod_mpm_prefork.so/LoadModule mpm_prefork_module modules\/mod_mpm_prefork.so/g' /etc/httpd/conf.modules.d/00-mpm.conf; \
         sed -i 's/LoadModule mpm_worker_module modules\/mod_mpm_worker.so/#LoadModule mpm_worker_module modules\/mod_mpm_worker.so/g' /etc/httpd/conf.modules.d/00-mpm.conf; \
 }
