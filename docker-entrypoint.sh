@@ -9,6 +9,7 @@ setup() {
 
         if [ ! -z "$SELFUPDATE" ]; then
                 systemctl enable yum-cron
+		yum update -y
         fi
 
         if [ ! -z "$HTTPD_SERVERADMIN" ]; then    
