@@ -18,7 +18,6 @@ setup() {
         fi
 
         if [ ! -z "$HTTPD_HARDENING" ]; then    
-                sed -i 's/expose_php = On/expose_php = Off/g' /etc/opt/remi/php71/php.ini
                 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php.ini
                 echo "ServerTokens Prod" >>/etc/httpd/conf/httpd.conf
                 echo "ServerSignature Off" >>/etc/httpd/conf/httpd.conf
@@ -34,7 +33,6 @@ setup() {
         fi
 
         if [ ! -z "$TIMEZONE" ]; then
-                echo "date.timezone = $TIMEZONE" >>/etc/opt/remi/php71/php.ini
                 echo "date.timezone = $TIMEZONE" >>/etc/php.ini
                 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
         fi
