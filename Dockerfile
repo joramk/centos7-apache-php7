@@ -1,5 +1,5 @@
 FROM    centos:7
-MAINTAINER Joram Knaack
+MAINTAINER joramk@gmail.com
 ENV     container docker
 
 ENV     HTTPD_MODSSL            1
@@ -12,10 +12,11 @@ ENV     HTTPD_SERVERADMIN       root@localhost
 ENV     HTTPD_HARDENING         1
 ENV     HTTPD_TIMEZONE          Europe/Berlin
 
-LABEL   name="CentOS 7 - Latest Apache / PHP / phpMyAdmin" \             
+LABEL   name="CentOS 7 - Latest Apache / PHP / phpMyAdmin" \
         vendor="CentOS" \
         license="GPLv2" \
-        build-date="20171002"
+        build-date="20171002" \
+        maintainer="joramk@gmail.com"
 
 RUN {   yum update -y; yum install systemd yum-utils epel-release -y; \
         curl https://repo.codeit.guru/codeit.el7.repo >/etc/yum.repos.d/codeit.el7.repo; \
@@ -50,6 +51,7 @@ RUN {   (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == sy
         sed -i 's/LoadModule mpm_worker_module modules\/mod_mpm_worker.so/#LoadModule mpm_worker_module modules\/mod_mpm_worker.so/g' /etc/httpd/conf.modules.d/00-mpm.conf; \
 }
 
+RUN     touch /firstrun
 COPY    ./docker-entrypoint.sh /
 
 HEALTHCHECK CMD systemctl -q is-active httpd || exit 1
