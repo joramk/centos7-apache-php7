@@ -8,6 +8,7 @@ setup() {
         fi
 
         if [ ! -z "$SELFUPDATE" ]; then
+		sed -i 's/apply_updates = no/apply_updates = yes/g' /etc/yum/yum-cron.conf
                 systemctl enable yum-cron
 		yum update -y
         fi
