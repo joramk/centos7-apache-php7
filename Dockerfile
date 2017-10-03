@@ -30,8 +30,10 @@ RUN {   (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == sy
         rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
         rm -f /lib/systemd/system/basic.target.wants/*; \
         rm -f /lib/systemd/system/anaconda.target.wants/*; \
+	rm -f /etc/fstab; touch /etc/fstab; \
         sed -i 's/#LoadModule mpm_prefork_module modules\/mod_mpm_prefork.so/LoadModule mpm_prefork_module modules\/mod_mpm_prefork.so/g' /etc/httpd/conf.modules.d/00-mpm.conf; \
         sed -i 's/LoadModule mpm_worker_module modules\/mod_mpm_worker.so/#LoadModule mpm_worker_module modules\/mod_mpm_worker.so/g' /etc/httpd/conf.modules.d/00-mpm.conf; \
+	sed -i 's/#ForwardToConsole=no/ForwardToConsole=yes/g' /etc/systemd/journald.conf; \
 }
 
 COPY    ./docker-entrypoint.sh /
