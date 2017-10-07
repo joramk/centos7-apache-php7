@@ -12,13 +12,13 @@ RUN {   yum update -y; yum install systemd yum-utils yum-cron epel-release -y; \
         curl https://repo.codeit.guru/codeit.el7.repo >/etc/yum.repos.d/codeit.el7.repo; \
         yum install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm -y; \
 	yum-config-manager --enable remi-php71 --enable remi; \
-        yum install httpd mod_ssl openssl php \ 
-        php71-php-json php71-php-cli \
-        php71-php-mbstring php71-php-mysqlnd \
-        php71-php-gd php71-php-xml \
-        php71-php-bcmath php71-runtime \
-        php71-php-common php71-php-pdo \
-        php71-php-process php71-php-tidy phpMyAdmin -y; \
+        yum install httpd mod_ssl openssl php php-pecl-xdebug \ 
+        php-json php-cli \
+        php-mbstring php-mysqlnd \
+        php-gd php-xml \
+        php-bcmath runtime \
+        php-common php-pdo \
+        php-process php-tidy phpMyAdmin -y; \
         yum clean all; rm -rf /var/cache/yum; \
 }
 

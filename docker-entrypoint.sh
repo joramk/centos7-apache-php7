@@ -7,6 +7,10 @@ setup() {
                 yum remove mod_ssl -y
         fi
 
+	if [ ! -z "$REMOVE_PHP_XDEBUG" ]; then
+                yum remove php-pecl-xdebug -y
+        fi
+
         if [ ! -z "$SELFUPDATE" ]; then
 		sed -i 's/apply_updates = no/apply_updates = yes/g' /etc/yum/yum-cron.conf
                 systemctl enable yum-cron
